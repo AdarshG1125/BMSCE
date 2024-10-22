@@ -1,0 +1,80 @@
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#define size 5
+int rear=-1,front=-1,ele,n,d;
+int cq[size];
+
+void insert(){
+if(front==(rear+1)%size){
+    printf("circular queue is full!\n");
+    return;
+}
+if(front==-1){
+    front=0;
+    rear=0;
+} else {
+   rear=(rear+1)%size;
+}
+printf("enter an element: ");
+scanf("%d",&ele);
+cq[rear]=ele;
+return;
+}
+
+int deletes(){
+if(rear==-1){
+    printf("queue is empty!\n");
+    return -1;
+}
+ele = cq[front];
+if (front==rear){
+    front=-1;
+    rear=-1;
+} else {
+front=(front+1)%size;
+}
+return ele;
+}
+
+void display(){
+   if (front==-1){
+    printf("circular queue is empty!\n");
+    return;
+   } else {
+      if(front<=rear){
+      for(int i=front;i<=rear;i++){
+        printf("%d\n",cq[i]);
+      }}
+      else {
+      for(int i=front;i<=size-1;i++){
+        printf("%d\n",cq[i]);
+      };
+      for(int i=0;i<=rear;i++){
+        printf("%d\n",cq[i]);
+      };
+
+      }
+
+      return;
+   }
+}
+
+int main(){
+   printf("Pick your case:\n1 > insert\n2 > delete\n3 > display\n4 > exit\n");
+   while(1){
+    printf("case: ");
+    scanf("%d",&n);
+    switch(n){
+    case 1:insert();break;
+    case 2:d=deletes();
+           if(d!=-1){
+            printf("deleted element is: %d\n",d);
+           };break;
+    case 3:display();break;
+    case 4:exit(0);
+    }
+   }
+   return 0;
+}
